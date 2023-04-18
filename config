@@ -1,41 +1,24 @@
-### YR COLORS
-set $dark_magneta      #0f0210 
-set $light_gray        #adadad 
-set $dark_violet       #4b0082 
-set $red               #ff5555
-set $transparent       #000000
-set $white             #f8f8f2
-set $green             #50fa7b
-
-
-# class                     border            background        text            indicator         child_border
-# client.focused            $dark_violet      $dark_magneta     $white          $dark_violet      $dark_violet
-# client.focused_inactive   $dark_violet      $dark_magneta     $light_gray     $dark_violet      $dark_magneta
-# client.unfocused          $dark_magneta     $dark_magneta     $light_gray     $dark_magneta     $dark_magneta
-# client.urgent             $red              $dark_violet      $green          $red              $red
-# client.placeholder        $transparent      $dark_magneta     $white          $dark_magneta     $dark_magneta
-# client.background         $dark_magneta
-
-
 ### DRACULA COLORS
-set $darker            #282a36
-set $dark              #44475a
-set $darkblue          #6272a4
-set $cyan              #8be9fd
-set $orange            #ffb86c
-set $pink              #ff79c6
-set $purple            #bd93f9
+set $background        #282a36	
+set $current_line      #44475a	
+set $foreground        #f8f8f2	
+set $comment           #6272a4	
+set $cyan              #8be9fd	
+set $green             #50fa7b	
+set $orange            #ffb86c	
+set $pink              #ff79c6	
+set $purple            #bd93f9	
+set $red               #ff5555	
 set $yellow            #f1fa8c
-set $darkgrey          #bfbfbf
 
 
-# class                     border            bground           text            indicator         child_border
-client.focused              $green            $purple           $darker         $green            $green
-client.focused_inactive     $pink             $dark             $white          $pink             $pink
-client.unfocused            $purple           $darker           $darkgrey       $purple           $purple
+# class                     # border          # bground         # text          # indicator       # child_border
+client.focused              $green            $purple           $background     $green            $green
+client.focused_inactive     $comment          $current_line     $foreground     $comment          $comment
+client.unfocused            $comment          $background       $background     $comment          $comment
 client.urgent               $red              $red              $green          $red              $red
-client.placeholder          $darker           $darker           $white          $darker           $darker
-client.background           $darker
+client.placeholder          $background       $background       $foreground     $background       $background
+client.background           $background
 
 
 ### BORDER 
@@ -59,20 +42,19 @@ for_window [all] title_window_icon padding 3px
 
 ### SET VARIABLES
 set $mod Mod4
+set $alt Mod1
 set $browser chromium
-# set $browser firefox
-# set $term kitty
 set $term alacritty
 
-# set $up Up
-# set $down Down
-# set $left Left
-# set $right Right
+set $up Up
+set $down Down
+set $left Left
+set $right Right
 
-set $up k
-set $down j
-set $left h
-set $right l
+# set $up k
+# set $down j
+# set $left h
+# set $right l
 
 
 
@@ -82,16 +64,16 @@ font pango: DejaVu Sans Mono, Font Awesome 5 Free Solid 10
 
 
 ### VOLUME CONTROLS
-bindsym XF86AudioMute          exec --no-startup-id      ~/.scripts/control_volume.sh mute && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume   exec --no-startup-id      ~/.scripts/control_volume.sh down && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume   exec --no-startup-id      ~/.scripts/control_volume.sh up   && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMicMute       exec --no-startup-id      ~/.scripts/control_volume.sh mic  && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute          exec --no-startup-id      ~/.scripts/system/control-volume.sh mute && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume   exec --no-startup-id      ~/.scripts/system/control-volume.sh down && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume   exec --no-startup-id      ~/.scripts/system/control-volume.sh up   && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMicMute       exec --no-startup-id      ~/.scripts/system/control-volume.sh mic  && pkill -RTMIN+10 i3blocks
 
 
 
 ### BRIGHTNESS CONTROLS
-bindsym XF86MonBrightnessUp    exec --no-startup-id      ~/.scripts/get_brightness.sh pkill -RTMIN+9 i3blocks
-bindsym XF86MonBrightnessDown  exec --no-startup-id      ~/.scripts/get_brightness.sh pkill -RTMIN+9 i3blocks
+bindsym XF86MonBrightnessUp    exec --no-startup-id      ~/.scripts/system/get-brightness.sh pkill -RTMIN+9 i3blocks
+bindsym XF86MonBrightnessDown  exec --no-startup-id      ~/.scripts/system/get-brightness.sh pkill -RTMIN+9 i3blocks
 
 
 
@@ -102,19 +84,16 @@ bindsym     $mod+Shift+f         exec --no-startup-id     pcmanfm-qt
 bindsym     $mod+Shift+c         exec --no-startup-id     galculator
 
 # SCREENSHOT
-bindsym     --release $mod+Print exec --no-startup-id     ~/.scripts/take_screenshot.sh full
+bindsym     --release $mod+Print exec --no-startup-id     ~/.scripts/system/take-screenshot.sh --full
+bindsym     --release Print      exec --no-startup-id     ~/.scripts/system/take-screenshot.sh --partial
 
-# PARTIAL SCREENSHOT
-bindsym     --release Print      exec --no-startup-id     ~/.scripts/take_screenshot.sh partial
-bindsym     $mod+shift+t         exec --no-startup-id     telegram-desktop
 
 # APPS MENU
 # bindsym     $mod+space           exec --no-startup-id     rofi -show drun    
-bindsym     $mod+space           exec --no-startup-id     ~/.scripts/dmenu_scripts.sh apps
+bindsym     $mod+space           exec --no-startup-id     ~/.scripts/system/dmenu-scripts.sh apps
 
 ## CLIPBOARD MENU
-# bindsym     mod1+c               exec --no-startup-id     CM_LAUNCHER=rofi clipmenu
-bindsym     mod1+c               exec --no-startup-id     ~/.scripts/dmenu_scripts.sh clipmenu
+bindsym     $alt+space             exec --no-startup-id     ~/.scripts/system/dmenu-scripts.sh clipmenu
 
 
 ### CONSOLE APPS SHORTCUTS
@@ -127,15 +106,6 @@ bindsym     $mod+Escape          exec --no-startup-id     $term --title htop    
 
 ## STORAGE ANALYZER
 bindsym     $mod+shift+d         exec --no-startup-id     $term --title ncdu    -e ncdu  
-
-## TEXT EDITOR
-# bindsym     $mod+shift+n         exec --no-startup-id     $term --title nvim    -e nvim  
-
-## FILE MANAGER
-bindsym     $mod+shift+r         exec --no-startup-id     $term --title ranger  -e ranger 
-
-## CALCULATOR
-# bindsym     $mod+shift+c         exec --no-startup-id     $term --title bc      -e bc           
 
 
 
@@ -167,11 +137,11 @@ bindsym     $mod+Ctrl+$right     move right 30px
 bindsym     $mod+v             split v
 
 ### FLOATING / STICKY
-bindsym     mod1+f             floating toggle
-bindsym     mod1+s             sticky toggle
+bindsym     $mod+Tab           floating toggle
+bindsym     $alt+s             sticky toggle
 
 ### RELOAD CONF / RESTART i3
-bindsym     mod1+r             reload               
+bindsym     $mod+Shift+r       reload               
 bindsym     $mod+r             restart  
 
 ### FULLSCREEN TOGGLE
@@ -193,7 +163,7 @@ bindsym     $mod+c             focus child
 set $session " (l)   (e)   (r)   (s)"
 mode  $session {
 	bindsym e              exec --no-startup-id i3-msg exit;     mode "default"
-    bindsym l              exec --no-startup-id ~/.scripts/lock; mode "default"
+    bindsym l              exec --no-startup-id ~/.scripts/system/lock.sh; mode "default"
     bindsym s              exec --no-startup-id sudo poweroff && notify-send "shutting down..." -u low;   mode "default"
     bindsym r              exec --no-startup-id sudo reboot && notify-send "rebooting..." -u low;     mode "default"
 
@@ -203,21 +173,7 @@ mode  $session {
     bindsym q              mode "default"
 }
 
-bindsym mod1+x mode $session
-
-
-
-### WORKSPACE NAMES
-set $ws1  "1"
-set $ws2  "2"
-set $ws3  "3"
-set $ws4  "4"
-set $ws5  "5"
-set $ws6  "6"
-set $ws7  "7"
-set $ws8  "8"
-set $ws9  "9"
-set $ws10 "10"
+bindsym $alt+x mode $session
 
 
 
@@ -233,13 +189,23 @@ for_window     [class="Rustdesk"]                                    floating en
 for_window     [class="com.xiaomitool.v2.gui.MainWindow"]            floating enable
 #for_window     [class="Gtick"]                                       floating enable
 #for_window     [class="Lingot"]                                      floating enable
-#for_window     [class="Telegram"]                                    floating enable
+
+
+### SCRATHCPADS
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+for_window     [class="^TelegramDesktop$"]                         move window to scratchpad
+# bindsym     $mod+Shift+t         [class="^TelegramDesktop$"]  scratchpad show; move position center
+bindsym     $mod+Shift+t         [class="Telegram"]  scratchpad show
+# bindsym     $mod+shift+t         exec --no-startup-id     telegram-desktop
 
 
 
 ### SELECT TAGS FOR APPS
 for_window     [class="Firefox"]                            move to workspace $ws1
 for_window     [class="Chromium"]                           move to workspace $ws1
+for_window     [class="librewolf"]                          move to workspace $ws1
 
 for_window     [class="kitty"]                              move to workspace $ws2
 for_window     [class="Alacritty"]                          move to workspace $ws2
@@ -247,7 +213,6 @@ for_window     [class="Alacritty"]                          move to workspace $w
 for_window     [class="pcmanfm-qt"]                         move to workspace $ws3
 for_window     [class="Alacritty" title="ranger"]           move to workspace $ws3
 
-for_window     [class="Telegram"]                           move to workspace $ws4
 for_window     [class="Slack"]                              move to workspace $ws4
 
 for_window     [class="jetbrains-pycharm-ce"]               move to workspace $ws5
@@ -276,6 +241,23 @@ for_window     [class="guitarpro7.exe"]                     move to workspace $w
 
 
 
+### BAR TOGGLE
+bindsym $mod+b exec --no-startup-id ~/.config/i3/scripts/i3barToggle
+
+### WORKSPACE NAMES
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
+set $ws10 "10"
+
+
+
 # SWITCHING WORKSPACES KEYS
 bindsym $mod+1                            workspace number $ws1
 bindsym $mod+2                            workspace number $ws2
@@ -288,8 +270,8 @@ bindsym $mod+8                            workspace number $ws8
 bindsym $mod+9                            workspace number $ws9
 bindsym $mod+0                            workspace number $ws10
 
-bindsym $mod+Tab                          workspace next
-bindsym $mod+Shift+Tab                    workspace prev
+bindsym $mod+Next                         workspace next
+bindsym $mod+Prior                        workspace prev
 
 
 
@@ -307,28 +289,20 @@ bindsym $mod+Shift+0                      move container to workspace number $ws
 
 
 
-### BAR TOGGLE
-bindsym $mod+b exec --no-startup-id ~/.config/i3/scripts/i3barToggle
-
-
 # i3bar SETUP
 bar {
 		position top
 		status_command i3blocks
 		workspace_buttons yes
 		colors {
-			# background 			$dark_magneta
-			# statusline 											$white
-			# focused_workspace 	$dark_violet 	$dark_violet 	$white
-			# urgent_workspace	$red			$red			$green		
-            background #282A36
-            statusline #F8F8F2
+            background $background
+            statusline $foreground
             separator  $purple
 
-            focused_workspace  $purple $purple $darker
-            active_workspace   $darker $darker $purple
-            inactive_workspace $darker $darker $purple
-            urgent_workspace   $red    $red    $darker
-            binding_mode       $green  $green  $darker
+            focused_workspace  $purple     $purple     $background
+            active_workspace   $background $background $purple
+            inactive_workspace $background $background $purple
+            urgent_workspace   $red        $red        $background
+            binding_mode       $green      $green      $background
   }
 }
